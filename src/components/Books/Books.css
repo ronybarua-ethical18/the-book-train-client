@@ -1,0 +1,10 @@
+#book-image{
+    height:300px;
+}
+#single-card{
+    border: transparent;
+    border-radius: 16px;
+}
+.price-title{
+    font-size: 30px;
+}
