@@ -27,7 +27,7 @@ const CheckOut = (props) => {
                     <thead>
                         <tr>
                             <th>Description</th>
-                            <th>Author</th>
+                            <th>Author Name</th>
                             <th>Quantity</th>
                             <th>price</th>
                         </tr>
