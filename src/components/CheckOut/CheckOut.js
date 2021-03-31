@@ -11,7 +11,7 @@ const CheckOut = (props) => {
     const handleProceedOrder = () =>{
         const orderDetails = {email:loggedInUser.email, Quantity: 1, userName:loggedInUser.displayName, orderTime: new Date(), name:name, authorName:authorName, price:price};
         console.log(orderDetails);
-        fetch('http://localhost:5000/addOrder', {
+        fetch('https://apricot-sundae-82080.herokuapp.com/addOrder', {
             method: 'POST',
             headers:{'Content-Type': 'application/json'},
             body:JSON.stringify(orderDetails)

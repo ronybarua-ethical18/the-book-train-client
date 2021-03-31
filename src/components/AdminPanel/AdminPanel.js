@@ -17,7 +17,7 @@ const AdminPanel = () => {
         }
         console.log(bookData)
         if (bookData.imageURL !== null) {
-            const url = 'http://localhost:5000/addBook';
+            const url = 'https://apricot-sundae-82080.herokuapp.com/addBook';
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
