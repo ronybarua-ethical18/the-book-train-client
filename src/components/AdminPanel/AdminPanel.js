@@ -1,12 +1,22 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import ManageProduct from '../ManageProduct/ManageProduct';
 import './AdminPanel.css';
 const AdminPanel = () => {
     const { handleSubmit, register } = useForm();
     const [imageURL, setImageURL] = useState(null);
+    const [navigation, setNavigation] = useState(false);
+
+    const [books, setBooks] = useState([]);
+    useEffect(() => {
+        const url = 'https://apricot-sundae-82080.herokuapp.com/books';
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setBooks(data))
+    }, [])
 
     const onSubmit = data => {
         const bookData = {
@@ -49,16 +59,38 @@ const AdminPanel = () => {
             <div className="col-md-3 text-center p-4 bg-primary book-container">
                 <h3 className="mb-5 text-white">The Book Train</h3>
                 <div className="handle-books border">
-                    <Link className="book-link">Manage Books</Link>
-                    <Link className="book-link">Add Books</Link>
+                    <Link className="book-link" onClick={() => setNavigation(true)}>Manage Books</Link>
+                    <Link className="book-link" onClick={() => setNavigation()}>Add Books</Link>
                     <Link className="book-link">Edit Books</Link>
                 </div>
             </div>
-            <div className="col-md-9 bg-light book-container ">
+            <div className="col-md-9 bg-light book-container">
+
                 <div className="header-tite bg-white p-4">
-                    <h3>Add Book</h3>
+                    {
+                        !navigation ? <h3 className="text-dark">Add Book</h3> : <h3 className="text-dark">Manage Books</h3>
+                    }
                 </div>
-                <div className="addBookForm bg-dark m-4">
+                <div className="manage-books p-3 bg-light">
+                    {
+                        navigation && <Table striped bordered hover size="sm" className=" shadow">
+                            <thead>
+                                <tr>
+                                    <th className="p-3">Book Name</th>
+                                    <th className="p-3">Author Name</th>
+                                    <th className="p-3">price</th>
+                                    <th className="p-3">action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    books.map(book => <ManageProduct book={book}></ManageProduct>)
+                                }
+                            </tbody>
+                        </Table>
+                    }
+                </div>
+                {!navigation && <div className="addBookForm bg-dark m-4">
                     <Form onSubmit={handleSubmit(onSubmit)} className="p-3 bg-white rounded-lg">
                         <Form.Group controlId="formBasicName">
                             <Form.Label>Book Name</Form.Label>
@@ -80,7 +112,7 @@ const AdminPanel = () => {
                             Save
                         </Button>
                     </Form>
-                </div>
+                </div>}
             </div>
         </div>
     );

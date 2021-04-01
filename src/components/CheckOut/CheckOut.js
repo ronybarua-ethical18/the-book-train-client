@@ -3,6 +3,7 @@ import { Button, Table } from 'react-bootstrap';
 import './CheckOut.css';
 import { useContext } from 'react';
 import { UserContext } from '../../App';
+import { Link } from 'react-router-dom';
 const CheckOut = (props) => {
     const {name, authorName, price} = props.bookInfo;
 
@@ -41,7 +42,7 @@ const CheckOut = (props) => {
                         </tr>
                     </tbody>
                 </Table>
-                <Button variant="primary" onClick={handleProceedOrder} className="mt-4">Check Out</Button>
+                <Link to="/orders"><Button variant="primary" onClick={handleProceedOrder} className="mt-4">Check Out</Button></Link>
             </div>
         </div>
     );
