@@ -10,7 +10,7 @@ const CheckOut = (props) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     const handleProceedOrder = () =>{
-        const orderDetails = {email:loggedInUser.email, Quantity: 1, userName:loggedInUser.displayName, orderTime: new Date(), name:name, authorName:authorName, price:price};
+        const orderDetails = {email:loggedInUser.email, Quantity: 1, userName:loggedInUser.displayName, orderTime: new Date().toDateString("dd/mm/yyyy"), name:name, authorName:authorName, price:price};
         console.log(orderDetails);
         fetch('https://apricot-sundae-82080.herokuapp.com/addOrder', {
             method: 'POST',

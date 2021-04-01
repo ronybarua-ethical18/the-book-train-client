@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import Books from '../Books/Books';
 
 const Home = () => {
@@ -13,6 +13,9 @@ const Home = () => {
     return (
         <div className="bg-light p-4">
            <Container>
+               {
+                   books.length === 0 && <Spinner animation="grow" />
+               }
                 <Row>
                     {
                         books.map(book => <Col lg={4} md={6} sm={6} xs={12} ><Books book={book}></Books></Col>)

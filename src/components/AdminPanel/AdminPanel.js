@@ -34,6 +34,9 @@ const AdminPanel = () => {
                 body: JSON.stringify(bookData)
             })
                 .then(res => console.log('server side response', res))
+                .then(data =>{
+                    alert('book added successfully');
+                })
         }
         else {
             console.log('Image url is null')
@@ -109,7 +112,7 @@ const AdminPanel = () => {
                             <Form.File onChange={handleImageUpload} id="exampleFormControlFile1" label="Add Book Cover" />
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            Save
+                            Add Book
                         </Button>
                     </Form>
                 </div>}

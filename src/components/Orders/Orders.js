@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { UserContext } from '../../App';
+import { Spinner, Table } from 'react-bootstrap';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch('https://apricot-sundae-82080.herokuapp.com/orders?email='+loggedInUser.email, {
+        fetch('https://apricot-sundae-82080.herokuapp.com/orders?email=' + loggedInUser.email, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', }
         })
@@ -17,11 +18,41 @@ const Orders = () => {
             .then(data => setOrders(data))
     }, [])
     return (
-        <div>
-            <h1>You have {orders.length} booking</h1>
+        <div className="container">
+            <h1>You have ordered {orders.length} books</h1>
+            <hr></hr>
+            <div className="d-flex justify-content-between">
+                <span className="mr-3"><b>User Email:</b> {loggedInUser.email}</span>
+                <span><b>User Name:</b> {loggedInUser.displayName}</span>
+            </div>
+            
             {
-                orders.map(order => <li>{order.email} orderItem: {order.name} AuthorName: {order.authorName} price: {order.price} </li>)
+                orders.length === 0 && <Spinner animation="grow" />
             }
+            <div className="order-list mt-4">
+                <Table striped bordered hover size="sm" className=" shadow">
+                    <thead>
+                        <tr>
+                            <th className="p-3">Book Name</th>
+                            <th className="p-3">Author Name</th>
+                            <th className="p-3">Price</th>
+                            <th className="p-3">Quantity</th>
+                            <th className="p-3">Order Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            orders.map(order => <tr>
+                                <td>{order.name}</td>
+                                <td>{order.authorName}</td>
+                                <td>${order.price}</td>
+                                <td>1</td>
+                                <td>{order.orderTime}</td>
+                            </tr>)
+                        }
+                    </tbody>
+                </Table>
+            </div>
         </div>
     );
 };

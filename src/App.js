@@ -40,6 +40,7 @@ function App() {
               <Login />
             </Route>
             <PrivateRoute path="/orders">
+            <Header loggedInUser={loggedInUser}></Header>
               <Orders></Orders>
             </PrivateRoute>
             <PrivateRoute path="/BookDetails/:bookId">

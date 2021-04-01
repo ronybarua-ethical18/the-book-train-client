@@ -7,7 +7,7 @@ const SearchForm = () => {
                 <h1 className="title">The book train is arrived YAY!</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <div className="d-flex justify-content-center">
-                    <Form.Control id="search-form" type="text" placeholder="search event" />
+                    <Form.Control id="search-form" type="text" placeholder="search book" />
                     <Button variant="primary">Learn more</Button>
                 </div>
             </Jumbotron>
