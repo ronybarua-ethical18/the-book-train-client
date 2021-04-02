@@ -1,16 +1,18 @@
-.title{
-    color:#FF5733;
+.title {
+    color: #FF5733;
 }
-#learn-title{
-    background-color:#fff;
-    outline:none;
-    color:black;
-    border:none;
-    padding:10px 15px ;
-    border-radius:25px;
-}
-#search-form{
+
+#learn-title {
+    background-color: #fff;
+    outline: none;
+    color: black;
+    border: none;
+    padding: 10px 15px;
     border-radius: 25px;
-    padding:20px 20px;
+}
+
+#search-form {
+    border-radius: 25px;
+    padding: 20px 20px;
     margin-right: 10px;
 }

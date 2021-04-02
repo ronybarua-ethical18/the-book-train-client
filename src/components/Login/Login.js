@@ -50,7 +50,7 @@ const Login = () => {
                 <h2 className="mb-4" id="login">
                     <FontAwesomeIcon className="mr-3" icon={faKey}></FontAwesomeIcon>Log In
                 </h2>
-                <p className="text-justify">Do you want to explore the collection of programming books ? then you are in a right place please log in before exploring our awesome book collections</p>
+                <p className="text-left">Do you want to explore the collection of programming books ? then you are in a right place please log in before exploring our awesome book collections</p>
                 <Button id="google-login" onClick={handleGoogleSignIn}>
                     <FontAwesomeIcon className="mr-3" icon={faGoogle}></FontAwesomeIcon>Log in with google</Button>
             </div>

@@ -1,26 +1,30 @@
-#search-form{
-    width:30%;
+#search-form {
+    width: 30%;
 }
-#jumbotrons{
+
+#jumbotrons {
     background-color: transparent;
 }
-.title{
+
+.title {
     font-weight: bold;
     text-transform: uppercase;
 }
-.bold-text{
+
+.bold-text {
     font-size: 50px;
 }
-#brand-title{
-    font-size:30px;
+
+#brand-title {
+    font-size: 30px;
     font-weight: 700;
-    color:#fff ;
-    letter-spacing: 5px;
+    color: #fff;
 }
-#login-title{
-    background-color:#fff;
-    outline:none;
-    border:none;
-    padding:10px 15px ;
-    border-radius:25px;
+
+#login-title {
+    background-color: #fff;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px;
 }

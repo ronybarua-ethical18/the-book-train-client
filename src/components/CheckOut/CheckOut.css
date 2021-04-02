@@ -1,8 +1,12 @@
-#checkOut{
-    background-color:#fff;
-    outline:none;
-    color:black;
-    border:2px solid salmon;
-    padding:10px 15px ;
-    border-radius:25px;
+#checkOut {
+    background-color: #fff;
+    outline: none;
+    color: black;
+    border: 2px solid salmon;
+    padding: 10px 15px;
+    border-radius: 25px;
+}
+
+#checkOut-table {
+    overflow: scroll;
 }

@@ -19,15 +19,15 @@ const ManageProduct = (props) => {
     }
     return (
         <tr>
-            <td>{name}</td>
-            <td>{authorName}</td>
-            <td>${price}</td>
-            <td><Button variant="warning mr-2">Update</Button>
-                <Button variant="danger" 
-                onClick={(e) => {
-                    deleteBook(_id)
-                    e.target.parentNode.parentNode.style.display = 'none'
-                }}>Delete</Button></td>
+            <td className="pr-3 pl-3">{name}</td>
+            <td className="pr-3 pl-3">{authorName}</td>
+            <td className="pr-3 pl-3">${price}</td>
+            <td className="pr-3 pl-3"><Button variant="warning mr-2 text-white">Update</Button>
+                <Button variant="danger"
+                    onClick={(e) => {
+                        deleteBook(_id)
+                        e.target.parentNode.parentNode.style.display = 'none'
+                    }}>Delete</Button></td>
         </tr>
     );
 };

@@ -1,5 +1,13 @@
-.order-item{
-    font-size:50px;
+.order-item {
+    font-size: 50px;
     font-weight: 700;
-    color:salmon;
+    color: salmon;
+}
+
+#order-table {
+    overflow-x: scroll;
+}
+
+#orders-table {
+    overflow: scroll;
 }
