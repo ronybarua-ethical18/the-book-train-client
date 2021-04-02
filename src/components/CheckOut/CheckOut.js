@@ -21,8 +21,8 @@ const CheckOut = (props) => {
         .then(data => console.log(data))
     }
     return (
-        <div className="container text-left shadow p-4">
-            <div className="checkout-details">
+        <div className="text-left bg-white">
+            <div className="container p-4 shadow checkout-details">
                 <h3 className="pb-4">Check Out</h3>
                 <Table striped bordered hover size="sm" className="p-4 shadow">
                     <thead>
@@ -42,7 +42,7 @@ const CheckOut = (props) => {
                         </tr>
                     </tbody>
                 </Table>
-                <Link to="/orders"><Button variant="primary" onClick={handleProceedOrder} className="mt-4">Check Out</Button></Link>
+                <Link to="/orders"><Button id="checkOut" onClick={handleProceedOrder} className="mt-4">Check Out</Button></Link>
             </div>
         </div>
     );

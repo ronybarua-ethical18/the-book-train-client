@@ -5,11 +5,54 @@
 .book-link{
     color:#fff;
     padding:20px;
-    display: block;
+    display: flex;
+    align-items: center;
+
 }
 .book-link:hover{
     
     text-decoration: none;
-    color:aliceblue;
-    background-color: blueviolet;
+    color:tomato;
+    background-color: #fff;
+}
+#sidebar{
+    background-color:#FF5733;
+}
+.title{
+    color: #FF5733;
+    font-weight: 700;
+}
+.book-title{
+    color:#FF5733;
+    font-weight: 700;
+}
+#input-book, #input-author, #input-price{
+    padding:20px 0;
+    border:none;
+    outline:none;
+    border-bottom: 2px solid gainsboro;
+}
+#input-file{
+    display: none;
+}
+#add-book{
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #FF5733;
+    color:#fff;
+    border:none;
+    outline:none;
+    cursor:pointer;
+}
+#file-label{
+    padding:12px 20px;
+    border-radius: 25px;
+    color:#FF5733;
+    cursor: pointer;
+    border: 2px solid #FF5733;
+}
+#file-label:hover{
+    color:#fff;
+    background-color: tomato;
+    transition: all 0.3s ease-in-out;
 }

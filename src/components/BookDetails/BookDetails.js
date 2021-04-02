@@ -14,8 +14,6 @@ const BookDetails = () => {
     }, [bookId])
     return (
         <div>
-
-            <h3>{books.name}</h3>
             <CheckOut bookInfo={books}></CheckOut>
         </div>
     );

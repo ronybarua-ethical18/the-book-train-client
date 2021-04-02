@@ -1,0 +1,17 @@
+#login{
+    color:#FF5733;
+    font-weight: 700;
+}
+#google-login{
+    background-color:#fff;
+    outline:none;
+    border:2px solid salmon;
+    padding:10px 15px ;
+    border-radius:25px;
+    color:#FF5733;
+}
+#google-login:hover{
+    background-color:#FF5733;
+    color:#fff;
+    transition: all 0.3s ease-in-out;
+}

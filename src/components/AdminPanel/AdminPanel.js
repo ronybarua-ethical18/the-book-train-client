@@ -1,3 +1,5 @@
+import { faBookReader, faCog, faHome, faMarker, faPlusCircle, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
@@ -9,7 +11,7 @@ const AdminPanel = () => {
     const { handleSubmit, register } = useForm();
     const [imageURL, setImageURL] = useState(null);
     const [navigation, setNavigation] = useState(false);
-
+    const [disableState, setDisableState] = useState(true);
     const [books, setBooks] = useState([]);
     useEffect(() => {
         const url = 'https://apricot-sundae-82080.herokuapp.com/books';
@@ -34,7 +36,7 @@ const AdminPanel = () => {
                 body: JSON.stringify(bookData)
             })
                 .then(res => console.log('server side response', res))
-                .then(data =>{
+                .then(data => {
                     alert('book added successfully');
                 })
         }
@@ -50,6 +52,9 @@ const AdminPanel = () => {
         bookImage.append('image', event.target.files[0])
         axios.post('https://api.imgbb.com/1/upload', bookImage)
             .then(function (response) {
+                if(response){
+                    setDisableState(false);
+                }
                 setImageURL(response.data.data.display_url);
                 console.log(response);
             })
@@ -59,19 +64,20 @@ const AdminPanel = () => {
     }
     return (
         <div className="row no-gutters text-left">
-            <div className="col-md-3 text-center p-4 bg-primary book-container">
-                <h3 className="mb-5 text-white">The Book Train</h3>
-                <div className="handle-books border">
-                    <Link className="book-link" onClick={() => setNavigation(true)}>Manage Books</Link>
-                    <Link className="book-link" onClick={() => setNavigation()}>Add Books</Link>
-                    <Link className="book-link">Edit Books</Link>
+            <div id="sidebar" className="col-md-3 p-4 book-container">
+                <h3 className="mb-5 text-white title text-center"><FontAwesomeIcon icon={faBookReader} className="mr-4"></FontAwesomeIcon>The Book Train</h3>
+                <div className="handle-books">
+                    <Link className="book-link" onClick={() => setNavigation(true)}> <FontAwesomeIcon icon={faCog} className="mr-4 fa-2x"></FontAwesomeIcon>Manage Books</Link>
+                    <Link className="book-link" onClick={() => setNavigation()}><FontAwesomeIcon icon={faPlusCircle} className="mr-4 fa-2x"></FontAwesomeIcon>Add Books</Link>
+                    <Link className="book-link"><FontAwesomeIcon icon={faMarker} className="mr-4 fa-2x"></FontAwesomeIcon>Edit Books</Link>
+                    <Link className="book-link" to="/home"><FontAwesomeIcon icon={faHome} className="mr-4 fa-2x"></FontAwesomeIcon>Go Home</Link>
                 </div>
             </div>
             <div className="col-md-9 bg-light book-container">
 
                 <div className="header-tite bg-white p-4">
                     {
-                        !navigation ? <h3 className="text-dark">Add Book</h3> : <h3 className="text-dark">Manage Books</h3>
+                        !navigation ? <h3 className="text-dark book-title">Add Book</h3> : <h3 className="text-dark book-title">Manage Books</h3>
                     }
                 </div>
                 <div className="manage-books p-3 bg-light">
@@ -97,23 +103,25 @@ const AdminPanel = () => {
                     <Form onSubmit={handleSubmit(onSubmit)} className="p-3 bg-white rounded-lg">
                         <Form.Group controlId="formBasicName">
                             <Form.Label>Book Name</Form.Label>
-                            <Form.Control type="text" ref={register} name="bookName" placeholder="Enter Book Name" required />
+                            <Form.Control type="text" ref={register} id="input-book" name="bookName" placeholder="Enter Book Name" required />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicAuthor">
                             <Form.Label>Author Name</Form.Label>
-                            <Form.Control type="text" ref={register} name="authorName" placeholder="Enter Author Name" required />
+                            <Form.Control type="text" ref={register} id="input-author" name="authorName" placeholder="Enter Author Name" required />
                         </Form.Group>
                         <Form.Group controlId="formBasicPrice">
                             <Form.Label>Book Price</Form.Label>
-                            <Form.Control type="number" ref={register} name="price" placeholder="Price" required />
+                            <Form.Control type="number" ref={register} id="input-price" name="price" placeholder="Price" required />
                         </Form.Group>
                         <Form.Group>
-                            <Form.File onChange={handleImageUpload} id="exampleFormControlFile1" label="Add Book Cover" />
+                            {/* <Form.File onChange={handleImageUpload} id="input-file" label="Add Book Cover" /> */}
+                            <input type="file" onChange={handleImageUpload} name="" id="input-file" />
+                            <label htmlFor="input-file" id="file-label"><FontAwesomeIcon icon={faUpload} className="mr-3"></FontAwesomeIcon>Upload Image</label>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Add Book
-                        </Button>
+                        <div className="d-flex justify-content-end">
+                            <Button type="submit" id="add-book" disabled={disableState}>Add Book</Button>
+                        </div>
                     </Form>
                 </div>}
             </div>

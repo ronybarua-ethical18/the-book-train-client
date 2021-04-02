@@ -22,7 +22,7 @@ const ManageProduct = (props) => {
             <td>{name}</td>
             <td>{authorName}</td>
             <td>${price}</td>
-            <td><Button variant="warning">Update</Button>
+            <td><Button variant="warning mr-2">Update</Button>
                 <Button variant="danger" 
                 onClick={(e) => {
                     deleteBook(_id)

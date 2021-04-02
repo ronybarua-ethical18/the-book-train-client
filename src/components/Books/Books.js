@@ -18,8 +18,8 @@ const Books = (props) => {
                     <Card.Text>{authorName}</Card.Text>
                 </Card.Body>
                 <div className="d-flex justify-content-between align-items-center">
-                        <b className="price-title text-primary">${price}</b>
-                        <Button variant="primary" onClick={() => handleClick(_id)}>Buy Now</Button>
+                        <b className="price-title text-dark">${price}</b>
+                        <Button id="buy" onClick={() => handleClick(_id)}>Buy Now</Button>
                 </div>
             </Card>
         </div>
