@@ -7,7 +7,6 @@ import {
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
-import SearchForm from './components/SearchForm/SearchForm';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { createContext } from 'react';
 import { useState } from 'react';
@@ -24,12 +23,10 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Header></Header>
-              <SearchForm />
               <Home />
             </Route>
             <Route path="/home">
               <Header></Header>
-              <SearchForm />
               <Home />
             </Route>
             <PrivateRoute path="/adminPanel">

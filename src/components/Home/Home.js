@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import Books from '../Books/Books';
-
+import SearchForm from '../SearchForm/SearchForm';
 const Home = () => {
+    const [search, setSearch] = useState('');
     const [books, setBooks] = useState([]);
     useEffect(() => {
-        const url = 'https://apricot-sundae-82080.herokuapp.com/books';
+        const url = ('https://apricot-sundae-82080.herokuapp.com/books?search='+search);
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))
-    }, [])
+    }, [search])
+    const handleSearch = event =>{
+        setSearch(event.target.value);
+    }
     return (
-        <div className="bg-light p-4">
+        <div className="bg-light p-0">
+            <SearchForm handleSearch={handleSearch}></SearchForm>
             <Container>
                 {
                     books.length === 0 && <Spinner animation="grow" />

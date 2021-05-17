@@ -8,7 +8,7 @@ import { UserContext } from '../../App';
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
-        <div className="pb-2 container">
+        <div className="pb-2 container header">
             <Navbar collapseOnSelect expand="lg" className="d-flex align-items-center" variant="light">
                 <Navbar.Brand href="/home" id="brand-title"><FontAwesomeIcon icon={faBookReader} className="mr-3"></FontAwesomeIcon><span className="bold-text">B</span>ook Train</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
