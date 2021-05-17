@@ -6,7 +6,7 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [books, setBooks] = useState([]);
     useEffect(() => {
-        const url = ('https://apricot-sundae-82080.herokuapp.com/books?search='+search);
+        const url = ('https://gentle-refuge-69010.herokuapp.com/books?search='+search);
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))
