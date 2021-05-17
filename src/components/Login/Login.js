@@ -1,21 +1,25 @@
-import React from 'react';
-import firebase from "firebase/app";
-import "firebase/auth";
-import firebaseConfig from './firebase.config';
-import { Button } from 'react-bootstrap';
-import { useContext } from 'react';
-import { UserContext } from '../../App';
-import { useHistory, useLocation } from 'react-router';
-import './Login.css'
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faLock, faSignature } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faKey } from '@fortawesome/free-solid-svg-icons';
+import React, { useContext, useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import './Login.css';
+import { createUserWithEmailAndPassword, handleGoogleSignIn, initializeFirebase, signInWithEmailAndPassword } from './LoginManager';
+import { useHistory, useLocation } from 'react-router';
+import { UserContext } from '../../App';
 const Login = () => {
-    // initialize app 
-    if (firebase.apps.length === 0) {
-        firebase.initializeApp(firebaseConfig);
-    }
-
+    initializeFirebase();
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: '',
+        email: '',
+        error: '',
+        password: '',
+        success: false
+    });
+    const [newUser, setNewUser] = useState(false);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     let history = useHistory();
     let location = useLocation();
@@ -23,37 +27,97 @@ const Login = () => {
 
     const handleResponse = (res, redirect) => {
         setLoggedInUser(res);
+        setUser(res);
         if (redirect) {
             history.replace(from);
         }
     }
-
-    const handleGoogleSignIn = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth()
-            .signInWithPopup(provider)
-            .then((result) => {
-                /** @type {firebase.auth.OAuthCredential} */
-                const user = result.user;
-                handleResponse(user, true)
-                console.log(user);
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
+    const googleSignIn = () => {
+        handleGoogleSignIn()
+            .then(res => {
+                handleResponse(res, true)
+            })
     }
-    return (
-        <div className="p-5 row no-gutters d-flex justify-content-center bg-white">
+    const handleBlur = (event) => {
+        let isFormValid = true;
+        if (event.target.name === 'email') {
+            isFormValid = /\S+@\S+\.\S+/.test(event.target.value);
+            if (!isFormValid) {
+                setEmailError('Email is invalid')
+            }
+            else {
+                setEmailError('');
+            }
+        }
+        if (event.target.name === 'password') {
+            const passwordLength = event.target.value.length > 6;
+            const hasNumber = /\d{1}/.test(event.target.value);
+            isFormValid = passwordLength && hasNumber;
+            if (!isFormValid) {
+                setPasswordError('Password should have number and letters and length must be greater than 6');
+            }
+            else {
+                setPasswordError('');
+            }
+            console.log(isFormValid);
+        }
+        if (isFormValid) {
+            const newUserInfo = { ...user };
+            newUserInfo[event.target.name] = event.target.value;
+            setUser(newUserInfo);
+        }
+    }
+    const handleSubmit = (event) => {
+        if (newUser && user.email && user.password) {
+            createUserWithEmailAndPassword(user.name, user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true)
+                })
+        }
+        if (!newUser && user.email && user.password) {
+            signInWithEmailAndPassword(user.email, user.password)
+                .then(res => {
+                    handleResponse(res, true)
+                })
+        }
+        event.preventDefault();
+    }
 
-            <div className="col-md-4 shadow col-md-offset-4 p-5">
-                <h2 className="mb-4" id="login">
-                    <FontAwesomeIcon className="mr-3" icon={faKey}></FontAwesomeIcon>Log In
-                </h2>
-                <p className="text-left">Do you want to explore the collection of programming books ? then you are in a right place please log in before exploring our awesome book collections</p>
-                <Button id="google-login" onClick={handleGoogleSignIn}>
-                    <FontAwesomeIcon className="mr-3" icon={faGoogle}></FontAwesomeIcon>Log in with google</Button>
-            </div>
+    return (
+        <div className="authentic-field bg-white">
+            <Container className="h-100">
+                <Row className="m-3">
+                    <div className="col-md-6 offset-md-3 shadow mt-4 p-4">
+                        <h4 className="display-5 price-title"><b>User Authentication</b></h4>
+                        <p style={{ color: 'red' }}>{user.error}</p>
+                        {user.success && <p style={{ color: 'green' }}>User {newUser ? 'Created' : 'Logged In'} Successfully</p>}
+                        <form action="" onSubmit={handleSubmit} className="mt-4">
+                            {newUser && <div className="input-field mb-3">
+                                <FontAwesomeIcon icon={faSignature} className="icons"></FontAwesomeIcon>
+                                <input onBlur={handleBlur} type="text" name="name" placeholder="name" required />
+                            </div>}
+                            <div className="input-field mb-3">
+                                <FontAwesomeIcon className="icons" icon={faUser}></FontAwesomeIcon>
+                                <input onBlur={handleBlur} type="text" name="email" placeholder="Enter your email" required />
+                            </div>
+                            <p className="text-danger">{emailError}</p>
+                            <div className="input-field mb-3">
+                                <FontAwesomeIcon className="icons" icon={faLock}></FontAwesomeIcon>
+                                <input onBlur={handleBlur} type="password" name="password" placeholder="Enter password" id="" required />
+                            </div>
+                            <p className="text-danger">{passwordError}</p>
+                            <div className="checkbox mb-2">
+                                <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
+                                <label htmlFor="newUser" className="ml-2">Sign up if you are new here </label>
+                            </div>
+                            <div className="">
+                                <button className="submit-button mb-2">{newUser ? 'Sign Up' : 'Sign In'}</button>
+                                <button onClick={googleSignIn} className="submit-button  mb-2">Sign in with google</button>
+                            </div>
+                        </form>
+                    </div>
+                </Row>
+            </Container>
         </div>
     );
 };

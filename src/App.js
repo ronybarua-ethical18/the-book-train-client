@@ -23,12 +23,12 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Header loggedInUser={loggedInUser}></Header>
+              <Header></Header>
               <SearchForm />
               <Home />
             </Route>
             <Route path="/home">
-              <Header loggedInUser={loggedInUser}></Header>
+              <Header></Header>
               <SearchForm />
               <Home />
             </Route>
@@ -36,15 +36,15 @@ function App() {
               <AdminPanel />
             </PrivateRoute>
             <Route path="/login">
-              <Header loggedInUser={loggedInUser}></Header>
+              <Header></Header>
               <Login />
             </Route>
             <PrivateRoute path="/orders">
-            <Header loggedInUser={loggedInUser}></Header>
+              <Header></Header>
               <Orders></Orders>
             </PrivateRoute>
             <PrivateRoute path="/BookDetails/:bookId">
-              <Header loggedInUser={loggedInUser}></Header>
+              <Header></Header>
               <BookDetails />
             </PrivateRoute>
           </Switch>

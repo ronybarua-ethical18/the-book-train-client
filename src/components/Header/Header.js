@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookReader } from '@fortawesome/free-solid-svg-icons';
-const Header = (props) => {
-    const loggedInUser = props.loggedInUser;
+import { UserContext } from '../../App';
+const Header = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
         <div className="pb-2 container">
             <Navbar collapseOnSelect expand="lg" className="d-flex align-items-center" variant="light">
@@ -16,10 +17,17 @@ const Header = (props) => {
                         <Link className="m-2 text-white" to="/home">Home</Link>
                         <Link className="m-2 text-white" to="/orders">Orders</Link>
                         <Link className="m-2 text-white" to="/adminPanel">Admin</Link>
-                        <Link className="m-2 text-white" to="/">Deals</Link>
+                        <Link className="m-2 text-white" to="/">Deals</Link>   
                     </Nav>
-                    {!loggedInUser.email && <Button id="login-title"> <Link className="m-2 text-dark" to="/login">Login</Link></Button>}
-                    <span><b className="text-white ml-2">{loggedInUser.displayName}</b></span>
+                    {!loggedInUser.email ? <Button id="login-title">
+                    <Link className="m-2 text-dark" to="/login">Login</Link></Button>
+                    :<span><b className="text-white m-3">{loggedInUser.displayName}</b></span>
+                    
+                    }
+                    {
+                        loggedInUser.email && <Button id="login-title" onClick={() => setLoggedInUser({})} className="text-dark">
+                        Sign Out</Button>
+                    }
                 </Navbar.Collapse>
             </Navbar>
         </div>

@@ -1,19 +1,47 @@
-#login {
-    color: #FF5733;
-    font-weight: 700;
+.signIn{
+    height:100vh;
 }
-
-#google-login {
-    background-color: #fff;
-    outline: none;
-    border: 2px solid salmon;
-    padding: 10px 15px;
-    border-radius: 25px;
-    color: #FF5733;
+.input-field{
+    height:55px;
+    background-color:#f0f0f0;
+    border-radius: 55px;
+    display:grid;
+    grid-template-columns: 15% 85%; 
 }
+input{
+    background:none;
+    outline:none;
+    border:none;
+    line-height: 1;
+    font-weight: 600;
+    font-size:1.1rem;
+    color:#333;
+}
+.user{
+    color:#333;
+}
+.icons{
 
-#google-login:hover {
-    background-color: #FF5733;
-    color: #fff;
+    color:#acacac;
+    font-size: 1.1rem;
+    line-height: 55px;
+    margin: auto;
+    text-align: center;
+}
+.submit-button{
+    padding:12px 40px;
+    border:1px solid #26C28B;
+    outline:none;
+    color: #26C28B;
+    background-color: transparent;
+}
+.submit-button:hover{
+    background-color: #26C28B;
+    color:#fff;
     transition: all 0.3s ease-in-out;
+}
+.authentic-field{
+    height:100vh;
+    display: flex;
+    align-items: center;
 }

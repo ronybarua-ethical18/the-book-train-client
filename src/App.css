@@ -3,5 +3,16 @@
 }
 .App{
   font-family: 'Poppins', sans-serif;
-  background-color: #FF5733;
+  background-color: #26C28B;
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar{
+  width:10px;
+}
+::-webkit-scrollbar-thumb{
+  background:rgb(17, 34, 64);
+  border-radius: 8px;;
+}
+::-webkit-scrollbar-thumb:hover{
+  background:#10122E;
 }

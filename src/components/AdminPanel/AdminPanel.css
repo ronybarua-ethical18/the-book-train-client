@@ -1,6 +1,7 @@
 .book-container {
     width: 100%;
     height: 100vh;
+    overflow-y:scroll;
 }
 
 .book-link {
@@ -12,21 +13,21 @@
 
 .book-link:hover {
     text-decoration: none;
-    color: tomato;
+    color: #26C28B;
     background-color: #fff;
 }
 
 #sidebar {
-    background-color: #FF5733;
+    background-color: #26C28B;
 }
 
 .title {
-    color: #FF5733;
+    color: #26C28B;
     font-weight: 700;
 }
 
 .book-title {
-    color: #FF5733;
+    color: #26C28B;
     font-weight: 700;
 }
 
@@ -44,7 +45,7 @@
 #add-book {
     padding: 10px 20px;
     border-radius: 20px;
-    background-color: #FF5733;
+    background-color: #26C28B;
     color: #fff;
     border: none;
     outline: none;
@@ -54,14 +55,14 @@
 #file-label {
     padding: 12px 20px;
     border-radius: 25px;
-    color: #FF5733;
+    color: #26C28B;
     cursor: pointer;
-    border: 2px solid #FF5733;
+    border: 2px solid #26C28B;
 }
 
 #file-label:hover {
     color: #fff;
-    background-color: tomato;
+    background-color: #26C28B;
     transition: all 0.3s ease-in-out;
 }
 

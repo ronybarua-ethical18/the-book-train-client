@@ -1,13 +1,15 @@
 import { faBookReader, faCog, faHome, faMarker, faPlusCircle, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../App';
 import ManageProduct from '../ManageProduct/ManageProduct';
 import './AdminPanel.css';
 const AdminPanel = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const { handleSubmit, register } = useForm();
     const [imageURL, setImageURL] = useState(null);
     const [navigation, setNavigation] = useState(false);
@@ -71,6 +73,11 @@ const AdminPanel = () => {
                     <Link className="book-link" onClick={() => setNavigation()}><FontAwesomeIcon icon={faPlusCircle} className="mr-4 fa-2x"></FontAwesomeIcon>Add Books</Link>
                     <Link className="book-link"><FontAwesomeIcon icon={faMarker} className="mr-4 fa-2x"></FontAwesomeIcon>Edit Books</Link>
                     <Link className="book-link" to="/home"><FontAwesomeIcon icon={faHome} className="mr-4 fa-2x"></FontAwesomeIcon>Go Home</Link>
+                </div>
+                <div className="sign-out mt-5 d-flex align-items-center p-4">
+                    <Button id="login-title" 
+                    onClick={() => setLoggedInUser({})} className="text-dark">
+                    Sign Out</Button>
                 </div>
             </div>
             <div className="col-md-9 bg-light book-container">
