@@ -2,7 +2,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
@@ -13,6 +14,7 @@ import { useState } from 'react';
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import Orders from './components/Orders/Orders';
 import BookDetails from './components/BookDetails/BookDetails';
+import Footer from './components/Footer/Footer';
 export const UserContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -21,13 +23,26 @@ function App() {
       <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
         <Router>
           <Switch>
+          <Route
+                exact
+                path="/"
+                render={() => {
+                    return (
+                      loggedInUser.email ?
+                      <Redirect to="/adminPanel" /> :
+                      <Redirect to="/login" /> 
+                    )
+                }}
+              />
             <Route exact path="/">
               <Header></Header>
               <Home />
+              <Footer />
             </Route>
             <Route path="/home">
               <Header></Header>
               <Home />
+              <Footer />
             </Route>
             <PrivateRoute path="/adminPanel">
               <AdminPanel />

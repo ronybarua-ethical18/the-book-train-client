@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
+import AboutUs from '../AboutUs/AboutUs';
 import Books from '../Books/Books';
+import ContactUs from '../ContactUs/ContactUs';
 import SearchForm from '../SearchForm/SearchForm';
 const Home = () => {
     const [search, setSearch] = useState('');
     const [books, setBooks] = useState([]);
     console.log(books)
     useEffect(() => {
-        const url = ('https://honest-backbacon-70549.herokuapp.com/books?search='+search);
+        const url = ('https://honest-backbacon-70549.herokuapp.com/books?search=' + search);
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))
     }, [search])
-    const handleSearch = event =>{
+    const handleSearch = event => {
         setSearch(event.target.value);
     }
     return (
@@ -27,6 +29,8 @@ const Home = () => {
                         books.map(book => <Col lg={4} md={6} sm={6} xs={12} ><Books book={book}></Books></Col>)
                     }
                 </Row>
+                <AboutUs />
+                <ContactUs />
             </Container>
         </div>
     );

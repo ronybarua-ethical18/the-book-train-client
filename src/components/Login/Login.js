@@ -19,6 +19,7 @@ const Login = () => {
         password: '',
         success: false
     });
+    console.log(user)
     const [newUser, setNewUser] = useState(false);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     let history = useHistory();
@@ -28,6 +29,7 @@ const Login = () => {
     const handleResponse = (res, redirect) => {
         setLoggedInUser(res);
         setUser(res);
+
         if (redirect) {
             history.replace(from);
         }
@@ -72,12 +74,14 @@ const Login = () => {
             createUserWithEmailAndPassword(user.name, user.email, user.password)
                 .then(res => {
                     handleResponse(res, true)
+                    setUser(res);
                 })
         }
         if (!newUser && user.email && user.password) {
             signInWithEmailAndPassword(user.email, user.password)
                 .then(res => {
                     handleResponse(res, true)
+                    console.log(res.error)
                 })
         }
         event.preventDefault();
@@ -89,21 +93,21 @@ const Login = () => {
                 <Row className="m-3">
                     <div className="col-md-6 offset-md-3 shadow mt-4 p-4">
                         <h4 className="display-5 price-title"><b>User Authentication</b></h4>
-                        <p style={{ color: 'red' }}>{user.error}</p>
+                        <p style={{ color: 'red' }}>{loggedInUser.error}</p>
                         {user.success && <p style={{ color: 'green' }}>User {newUser ? 'Created' : 'Logged In'} Successfully</p>}
                         <form action="" onSubmit={handleSubmit} className="mt-4">
                             {newUser && <div className="input-field mb-3">
                                 <FontAwesomeIcon icon={faSignature} className="icons"></FontAwesomeIcon>
-                                <input onBlur={handleBlur} type="text" name="name" placeholder="name" required />
+                                <input onBlur={handleBlur} type="text" name="name" id="name" placeholder="name" required />
                             </div>}
                             <div className="input-field mb-3">
                                 <FontAwesomeIcon className="icons" icon={faUser}></FontAwesomeIcon>
-                                <input onBlur={handleBlur} type="text" name="email" placeholder="Enter your email" required />
+                                <input onBlur={handleBlur} id="email" type="text" name="email" placeholder="Enter your email" required autoComplete="true" />
                             </div>
                             <p className="text-danger">{emailError}</p>
                             <div className="input-field mb-3">
                                 <FontAwesomeIcon className="icons" icon={faLock}></FontAwesomeIcon>
-                                <input onBlur={handleBlur} type="password" name="password" placeholder="Enter password" id="" required />
+                                <input onBlur={handleBlur} type="password" name="password" placeholder="Enter password" id="password" required />
                             </div>
                             <p className="text-danger">{passwordError}</p>
                             <div className="checkbox mb-2">

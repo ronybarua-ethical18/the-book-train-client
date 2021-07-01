@@ -83,12 +83,12 @@ const AdminPanel = () => {
             </div>
             <div className="col-md-9 bg-light book-container">
 
-                <div className="header-tite bg-white p-4">
+                <div className="header-tite bg-white p-4 position-fixed w-100">
                     {
-                        !navigation ? <h3 className="text-dark book-title">Add Book</h3> : <h3 className="text-dark book-title">Manage Books</h3>
+                        !navigation ? <h3 className="text-dark book-title">Add Book</h3> : <h3 className="text-dark bg-white book-title">Manage Books</h3>
                     }
                 </div>
-                <div  className="manage-books p-3 bg-light" id="manages-table">
+                <div className="manage-books p-3 bg-light" id="manages-table">
                     {
                         navigation && <Table striped bordered hover size="sm" className=" shadow" id="manage-table">
                             <thead>
