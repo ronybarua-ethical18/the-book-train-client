@@ -3,11 +3,11 @@ import { Button } from 'react-bootstrap';
 
 const ManageProduct = (props) => {
     const { _id, name, authorName, price } = props.book;
-
+    
     const deleteBook = (id) => {
         console.log("i am touched")
         console.log(id)
-        fetch(`https://gentle-refuge-69010.herokuapp.com/delete/${id}`, {
+        fetch(`https://honest-backbacon-70549.herokuapp.com/delete/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
@@ -17,6 +17,7 @@ const ManageProduct = (props) => {
                 }
             })
     }
+    console.log(props)
     return (
         <tr>
             <td className="pr-3 pl-3">{name}</td>

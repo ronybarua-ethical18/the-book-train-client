@@ -10,7 +10,7 @@ const Orders = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch('https://gentle-refuge-69010.herokuapp.com/orders?email=' + loggedInUser.email, {
+        fetch('https://honest-backbacon-70549.herokuapp.com/orders?email=' + loggedInUser.email, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', }
         })

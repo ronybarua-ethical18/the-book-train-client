@@ -15,8 +15,9 @@ const AdminPanel = () => {
     const [navigation, setNavigation] = useState(false);
     const [disableState, setDisableState] = useState(true);
     const [books, setBooks] = useState([]);
+ 
     useEffect(() => {
-        const url = 'https://gentle-refuge-69010.herokuapp.com/books';
+        const url = 'https://honest-backbacon-70549.herokuapp.com/books';
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))
@@ -31,7 +32,7 @@ const AdminPanel = () => {
         }
         console.log(bookData)
         if (bookData.imageURL !== null) {
-            const url = 'https://gentle-refuge-69010.herokuapp.com/addBook';
+            const url = 'https://honest-backbacon-70549.herokuapp.com/addBook';
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -46,7 +47,7 @@ const AdminPanel = () => {
             console.log('Image url is null')
         }
     };
-
+    console.log(books)
     const handleImageUpload = (event) => {
         console.log(event.target.files[0]);
         const bookImage = new FormData();

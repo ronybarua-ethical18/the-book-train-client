@@ -5,8 +5,9 @@ import SearchForm from '../SearchForm/SearchForm';
 const Home = () => {
     const [search, setSearch] = useState('');
     const [books, setBooks] = useState([]);
+    console.log(books)
     useEffect(() => {
-        const url = ('https://gentle-refuge-69010.herokuapp.com/books?search='+search);
+        const url = ('https://honest-backbacon-70549.herokuapp.com/books?search='+search);
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))

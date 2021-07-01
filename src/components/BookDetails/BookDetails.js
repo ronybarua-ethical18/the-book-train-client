@@ -7,7 +7,7 @@ const BookDetails = () => {
     const [books, setBooks] = useState([]);
     console.log(books);
     useEffect(() => {
-        fetch('https://gentle-refuge-69010.herokuapp.com/book/' + bookId)
+        fetch('https://honest-backbacon-70549.herokuapp.com/book/' + bookId)
             .then(res => res.json())
             .then(data => setBooks(data))
 
