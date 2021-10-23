@@ -17,7 +17,7 @@ const AdminPanel = () => {
     const [books, setBooks] = useState([]);
  
     useEffect(() => {
-        const url = 'https://honest-backbacon-70549.herokuapp.com/books';
+        const url = 'https://damp-peak-34954.herokuapp.com/books';
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))
@@ -32,7 +32,7 @@ const AdminPanel = () => {
         }
         console.log(bookData)
         if (bookData.imageURL !== null) {
-            const url = 'https://honest-backbacon-70549.herokuapp.com/addBook';
+            const url = 'https://damp-peak-34954.herokuapp.com/addBook';
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

@@ -12,7 +12,7 @@ const CheckOut = (props) => {
     const handleProceedOrder = () => {
         const orderDetails = { email: loggedInUser.email, Quantity: 1, userName: loggedInUser.displayName, orderTime: new Date().toDateString("dd/mm/yyyy"), name: name, authorName: authorName, price: price };
         console.log(orderDetails);
-        fetch('https://honest-backbacon-70549.herokuapp.com/addOrder', {
+        fetch('https://damp-peak-34954.herokuapp.com/addOrder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderDetails)

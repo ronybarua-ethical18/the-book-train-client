@@ -9,7 +9,7 @@ const Home = () => {
     const [books, setBooks] = useState([]);
     console.log(books)
     useEffect(() => {
-        const url = ('https://honest-backbacon-70549.herokuapp.com/books?search=' + search);
+        const url = ('https://damp-peak-34954.herokuapp.com/books?search=' + search);
         fetch(url)
             .then(res => res.json())
             .then(data => setBooks(data))
